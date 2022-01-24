@@ -14,6 +14,19 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
+Then send formatted message :
+### `can we schedule a call for <date> at <time>?`
+
+Examples: 
+1. can we schedule a call for 20th dec 2021 at 7 am?
+2. can we schedule a call for 20 dec 2021 at 9 am?
+3. can we schedule a call for 2 january 2022 at 8 pm?
+4. can we schedule a call for 2nd dec 2022 at 7 am?
+5. can we schedule a call for 1st january 2022 at 7 am?  
+
+### 'Additional feature is we can edit the meeting detail'
+Reason: Sometimes after the sending the message someone says not 20 december correct it to 21 december or is it possible to 8 am like that
+
 ### `npm test`
 
 Launches the test runner in the interactive watch mode.\
