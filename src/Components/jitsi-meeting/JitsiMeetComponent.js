@@ -96,7 +96,7 @@ class JitsiMeetComponent extends Component {
     let validMeetingTime = false
     const regexTime = /[0-9]:[0-9]{2}/;
     let newMeetingTime = ""
-    if (meetingTimeArray.length === 3) {
+    if (meetingTimeArray.length === 2) {
       let firstDigitChecked = false;
 
       // check meeting time for one digit  
@@ -119,8 +119,8 @@ class JitsiMeetComponent extends Component {
       // after checking the first digit then check the time format
       if (firstDigitChecked) {
         // check am pm
-        if (meetingTimeArray[1].toLowerCase() === "am" || meetingTimeArray[1].toLowerCase() === "pm") {
-          newMeetingTime += ` ${meetingTimeArray[1]}`
+        if (meetingTimeArray[1].slice(0, meetingTimeArray[1].length-2).toLowerCase() === "am" || meetingTimeArray[1].slice(0, meetingTimeArray[1].length-2).toLowerCase() === "pm") {
+          newMeetingTime += ` ${meetingTimeArray[1].slice(0, meetingTimeArray[1].length-2).toLowerCase()}`
           validMeetingTime = true;
         }
       }
@@ -159,7 +159,6 @@ class JitsiMeetComponent extends Component {
       const { message } = e;
       const messageLowercase = message.toLowerCase().trim();
       if (regex.test(messageLowercase) && messageLowercase.includes("at") && messageLowercase.trim().charAt(message.length - 1) === "?") {
-
         const meetingDate = messageLowercase.split(testString).pop().split('at').shift().trim();
         // check meeting date
         if (this.validateMeetingDate(meetingDate.split(" "))) {
@@ -167,7 +166,7 @@ class JitsiMeetComponent extends Component {
           const date = new Date(formattedMeetingDate);
           if (date !== "Invalid Date") {
             const meetingTimeArray = messageLowercase.split("at").pop().trim().split(" ");
-
+            console.log(meetingTimeArray)
             // check meeting time if meeting date is valid
             const result = this.validateMeetingTime(meetingTimeArray);
             if (result.validMeetingTime) {
