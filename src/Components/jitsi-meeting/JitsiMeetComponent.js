@@ -77,7 +77,7 @@ class JitsiMeetComponent extends Component {
       } 
       
       // check for more than two digit format date
-      else if ((meetingDateArray[0].length > 2 && !isNaN(Number(meetingDateArray[0][0])) && !isNaN(Number(meetingDateArray[0][1])))) {
+      else if ((meetingDateArray[0].length > 2 && !isNaN(Number(meetingDateArray[0][0])))) {
         console.log("check for only more than two digit date");
         validDate = true;
       }
@@ -139,6 +139,7 @@ class JitsiMeetComponent extends Component {
     const dateArray = meetingDate.split(" ");
     let createDate = "";
     for (var date of dateArray[0]) {
+      console.log(date);
       if (isNaN(Number(date))) {
         break;
       }
@@ -161,12 +162,12 @@ class JitsiMeetComponent extends Component {
       if (regex.test(messageLowercase) && messageLowercase.includes("at") && messageLowercase.trim().charAt(message.length - 1) === "?") {
         const meetingDate = messageLowercase.split(testString).pop().split('at').shift().trim();
         // check meeting date
+        console.log("meetingDate", meetingDate);
         if (this.validateMeetingDate(meetingDate.split(" "))) {
           const formattedMeetingDate = this.getDayFromMeetingDate(meetingDate);
           const date = new Date(formattedMeetingDate);
           if (date !== "Invalid Date") {
             const meetingTimeArray = messageLowercase.split("at").pop().trim().split(" ");
-            console.log(meetingTimeArray)
             // check meeting time if meeting date is valid
             const result = this.validateMeetingTime(meetingTimeArray);
             if (result.validMeetingTime) {
